@@ -1,29 +1,39 @@
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class Player : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
 
     }
     void Attack()
     {
-        float attackRange = 1f; // 공격 범위
+        float attackRange = 0.5f; // 공격 범위
         Vector2 attackPosition = new Vector2(transform.position.x + direction.x, transform.position.y + direction.y);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPosition, attackRange);
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            MacMove macMove = enemy.GetComponent<MacMove>();
+            Mac macMove = enemy.GetComponent<Mac>();
             if (enemy.CompareTag("Enemy")) // 적 태그 확인
                 macMove.Hitted();
             
         }
     }
 
+    public bool IsInDoor() { return isInDoor; }
 
-    // Update is called once per frame
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "UserHome")
+            isInDoor = true;
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "UserHome")
+            isInDoor = false;
+    }
+
     void Update()
     {
         if (Input.GetKey(KeyCode.A))
@@ -54,4 +64,6 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 2.0f;
     public float rotationSpeed = 5.0f;
     public Vector2 direction = Vector2.right;
+
+    private bool isInDoor = false;
 }
