@@ -7,7 +7,6 @@ public class Npc : MonoBehaviour
     private Vector3 originalScale;
     public VillageBackgroundManager villageManager;
     private bool isChoose = false;
-    public bool isFinish = false;
     void Start()
     {
         isChoose = false;
@@ -17,26 +16,22 @@ public class Npc : MonoBehaviour
     {
         isChoose = false;
     }
-    public void Finish()
-    {
-        isFinish = true;
-    }
     void OnMouseDown()
     {
-        if(!isFinish)
+        transform.localScale = originalScale;
+        if (!isChoose)
         {
-            transform.localScale = originalScale;
-            isChoose = true;
             villageManager.ZoomToTarget(transform, () => 
             { 
                 textUi.gameObject.SetActive(true); 
                 textUi.SetNpc(this);
             });
         }
+        isChoose = true;
     }
     void OnMouseEnter()
     {
-        if(!isChoose && !isFinish)
+        if(!isChoose)
         {
             transform.localScale = originalScale * 1.2f;
         }
@@ -44,7 +39,7 @@ public class Npc : MonoBehaviour
 
     void OnMouseExit()
     {
-        if(!isChoose && !isFinish)
+        if(!isChoose)
         {
             transform.localScale = originalScale;
         }
