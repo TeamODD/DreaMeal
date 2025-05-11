@@ -8,12 +8,20 @@ public class NightSystem : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (MorningManager.Instance == null)
+            date = 0;
+        else
+            date = MorningManager.Instance.date;
+
+        date = 1;
+
         if (100 < ratioOfStrongMac)
             ratioOfStrongMac = 100;
         else if (ratioOfStrongMac < 0)
             ratioOfStrongMac = 0;
 
-        textSystem.SetRenderString("안녕 나는 정지훈이야 제발 빠르게 나와주라 ^^ 알겠징?");
+        string renderString = renderStrings[date];
+        textSystem.SetRenderString(renderString);
 
         userHome.myConditionIsSafe = textSystem.IsSafeHome;
         userHome.collisionWithStrongMac = textSystem.HidePrevText;
@@ -28,7 +36,7 @@ public class NightSystem : MonoBehaviour
         timerText.text = nightTime.ToString();
 
         if (nightTime <= 0)
-            SceneManager.LoadScene("특정씬");
+            SceneManager.LoadScene("Morning");
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -125,4 +133,7 @@ public class NightSystem : MonoBehaviour
     public float nightTime;
     public float sponeTime;
     private float sumTime = 0.0f;
+
+    public string[] renderStrings;
+    private int date = 0;
 }
