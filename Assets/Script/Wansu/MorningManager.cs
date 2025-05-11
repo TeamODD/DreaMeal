@@ -5,6 +5,7 @@ public class MorningManager : MonoBehaviour
 {
     public static MorningManager Instance;
     public GameObject map;
+    public List<string> NpcNames;
     public List<GameObject> villages;
     public List<GameObject> uis;
     public StoryManager stm;
@@ -15,11 +16,24 @@ public class MorningManager : MonoBehaviour
         map.SetActive(true);
         foreach (GameObject v in villages)
         {
-            v.SetActive(false);
+            v.SetActive(true);
+        }
+        if (NpcNames != null)
+        {
+            foreach (string name in NpcNames)
+            {
+                GameObject npc = GameObject.Find(name);
+                if (npc == null) continue;
+                npc.SetActive(false);
+            }
         }
         foreach (GameObject ui in uis)
         {
             ui.SetActive(false);
+        }
+        foreach (GameObject v in villages)
+        {
+            v.SetActive(false);
         }
         stm.gameObject.SetActive(false);
         NextDay();

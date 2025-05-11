@@ -7,31 +7,42 @@ public class NpcUi : MonoBehaviour
     public Text text;
     public GameObject yesBtn;
     public GameObject noBtn;
+    public GameObject npcNextBtn;
     public List<GameObject> chooses;
     public VillageBackgroundManager villageManager;
     public StoryManager stm;
     private Npc npc;
     public TypingEffect te;
     public string[] dialogues;
-    private int currentIndex = 0;
+    public string npcName;
+    private string beforeYesButton;
+    private string yesButton = "어떤 조언을 할 것인가요?";
     private float[] yPositions = { 150f, 80f, 10f };
 
+    void Start()
+    {
+        beforeYesButton = npcName + "가 재난이 닥칠 사람일까요?";
+    }
     public void SetNpc(Npc npcObj)
     {
         npc = npcObj;
     }
     void OnEnable()
     {
-        currentIndex = 0;
         yesBtn.SetActive(false);
         noBtn.SetActive(false);
-        StartCoroutine(te.TypeDialog(text, dialogues[currentIndex], new List<GameObject> { yesBtn, noBtn }));
+        npcNextBtn.SetActive(false);
+        StartCoroutine(te.TypeDialog(text, dialogues[MorningManager.Instance.date - 1], new List<GameObject> { npcNextBtn }));
+    }
+    public void OnNpcNextClicked()
+    {
+        npcNextBtn.SetActive(false);
+        StartCoroutine(te.TypeDialog(text, beforeYesButton, new List<GameObject> { yesBtn, noBtn }));
     }
     public void OnYesClicked()
     {
         yesBtn.SetActive(false);
         noBtn.SetActive(false);
-        currentIndex++;
         MixRandomChocies();
         for (int i = 0; i < 3; ++i)
         {
@@ -40,7 +51,7 @@ public class NpcUi : MonoBehaviour
             pos.y = yPositions[i];
             rt.anchoredPosition = pos;
         }
-        StartCoroutine(te.TypeDialog(text, dialogues[currentIndex], chooses));
+        StartCoroutine(te.TypeDialog(text, yesButton, chooses));
     }
     public void OnNoClicked()
     {
@@ -58,7 +69,6 @@ public class NpcUi : MonoBehaviour
             chooses[rnd] = temp;
         }
     }
-    
     public void OnChoiceButtonClicked(int type)
     {
         stm.gameObject.SetActive(true);

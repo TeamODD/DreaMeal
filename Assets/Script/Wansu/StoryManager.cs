@@ -25,6 +25,7 @@ public class StoryManager : MonoBehaviour
     private string[] nowStoryTexts;
     private int storyIndex = 0;
     private int currentDay;
+    private bool isCorrect;
     public Image storyImage;
     public GameObject nextBtn;
     public GameObject endBtn;
@@ -52,47 +53,57 @@ public class StoryManager : MonoBehaviour
             {
                 nowStoryImages = stories[currentDay - 1].n1IncorrectImages;
                 nowStoryTexts = stories[currentDay - 1].n1IncorrectTexts;
+                isCorrect = false;
             }
             else if (type == 2) // 2번 오답
             {
                 nowStoryImages = stories[currentDay - 1].n2IncorrectImages;
                 nowStoryTexts = stories[currentDay - 1].n2IncorrectTexts;
+                isCorrect = false;
             }
             else // 정답
             {
                 nowStoryImages = stories[currentDay - 1].correctImages;
                 nowStoryTexts = stories[currentDay - 1].correctTexts;
                 MorningManager.Instance.correctCount++;
+                isCorrect = true;
             }
         }
         else // 올지 않은 npc 선택
         {
             nowStoryImages = stories[currentDay - 1].diffrentNpcImages;
             nowStoryTexts = stories[currentDay - 1].diffrentNpcText;
+            isCorrect = false;
+        }
+        if (!isCorrect)
+        {
+            MorningManager.Instance.NpcNames.Add(correctNpc[currentDay - 1].name);
         }
         storyImage.gameObject.SetActive(true);
         storyIndex = 0;
+        string str = nowStoryTexts[storyIndex].Replace("\\n", "\n");
         //storyImage.sprite = nowStoryImages[storyIndex];
         StartCoroutine(gradationAnimate.FadeImageWhite(storyImage, nowStoryImages[storyIndex]));
-        StartCoroutine(te.TypeDialog(text, nowStoryTexts[storyIndex], new List<GameObject> { nextBtn })); 
+        StartCoroutine(te.TypeDialog(text, str, new List<GameObject> { nextBtn })); 
     }
     public void OnNextClicked()
     {
         storyIndex++;
         if (storyIndex < nowStoryTexts.Length)
         {
+            string str = nowStoryTexts[storyIndex].Replace("\\n", "\n");
             if (storyIndex == nowStoryTexts.Length - 1)
             {
                 nextBtn.SetActive(false);
                 // storyImage.sprite = nowStoryImages[storyIndex];
                 StartCoroutine(gradationAnimate.FadeImageWhite(storyImage, nowStoryImages[storyIndex]));
-                StartCoroutine(te.TypeDialog(text, nowStoryTexts[storyIndex], new List<GameObject> { endBtn }));
+                StartCoroutine(te.TypeDialog(text, str, new List<GameObject> { endBtn }));
             }
             else
             {
                 // storyImage.sprite = nowStoryImages[storyIndex];
                 StartCoroutine(gradationAnimate.FadeImageWhite(storyImage, nowStoryImages[storyIndex]));
-                StartCoroutine(te.TypeDialog(text, nowStoryTexts[storyIndex]));
+                StartCoroutine(te.TypeDialog(text, str));
             }
         }
     }
