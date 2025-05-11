@@ -32,6 +32,7 @@ public class NpcUi : MonoBehaviour
         yesBtn.SetActive(false);
         noBtn.SetActive(false);
         currentIndex++;
+        MixRandomChocies();
         for (int i = 0; i < 3; ++i)
         {
             RectTransform rt = chooses[i].GetComponent<RectTransform>();
@@ -47,14 +48,24 @@ public class NpcUi : MonoBehaviour
         npc.ResetChoose();
         gameObject.SetActive(false);
     }
+    public void MixRandomChocies()
+    {
+        for (int i = chooses.Count - 1; i > 0; --i)
+        {
+            int rnd = Random.Range(0, i);
+            GameObject temp = chooses[i];
+            chooses[i] = chooses[rnd];
+            chooses[rnd] = temp;
+        }
+    }
     
-    public void OnChoiceButtonClicked(bool isCorrect)
+    public void OnChoiceButtonClicked(int type)
     {
         stm.gameObject.SetActive(true);
         foreach (GameObject choose in chooses) 
         { 
             choose.SetActive(false); 
         }
-        stm.OnNpcChoice(npc, isCorrect, this);
+        stm.OnNpcChoice(npc, this, type);
     }
 }

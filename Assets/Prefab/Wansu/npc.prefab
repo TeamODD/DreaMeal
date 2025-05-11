@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3facc5d384304f689f221edd440b9e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCorrect: 1
+  type: 0
 --- !u!1 &2882336605127816312
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +439,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC624\uB2F5"
+  m_Text: "1\uBC88 \uC624\uB2F5"
 --- !u!1 &4023693525502837224
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,7 +744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3facc5d384304f689f221edd440b9e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCorrect: 0
+  type: 2
 --- !u!1 &6290436188980614593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,7 +1024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3facc5d384304f689f221edd440b9e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCorrect: 0
+  type: 1
 --- !u!1 &7249501793754911736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,7 +1487,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC624\uB2F5"
+  m_Text: "2\uBC88 \uC624\uB2F5"
 --- !u!1 &9056495049861095306
 GameObject:
   m_ObjectHideFlags: 0

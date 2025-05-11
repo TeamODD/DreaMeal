@@ -23,6 +23,8 @@ public class VillageBackgroundManager : MonoBehaviour
         mapMaxX = bounds.max.x;
         mapMinY = bounds.min.y;
         mapMaxY = bounds.max.y;
+        originalPosition = mainCamera.transform.position;
+        originalSize = mainCamera.orthographicSize;
     }
     void Update()
     {
@@ -74,5 +76,12 @@ public class VillageBackgroundManager : MonoBehaviour
             isZoomedIn = false;
             back.SetActive(true);
         }));
+    }
+    public void ResetCamera()
+    {
+        back.SetActive(true);
+        mainCamera.transform.position = originalPosition;
+        mainCamera.orthographicSize = originalSize;
+        isZoomedIn = false;
     }
 }

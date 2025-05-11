@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class ChoiceButton : MonoBehaviour
 {
-    public bool isCorrect;
+    // 정답 : 0 / 오답 : 1, 2
+    public int type;
     public void Choiced()
     {
-        GetComponentInParent<NpcUi>().OnChoiceButtonClicked(isCorrect);
+        GetComponentInParent<NpcUi>().OnChoiceButtonClicked(type);
     }
 }
