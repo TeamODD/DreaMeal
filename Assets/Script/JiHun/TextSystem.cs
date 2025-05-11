@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,16 @@ public class TextShower
     {
         this.text = text;
         this.stringPeice = stringPeice;
+        fixPosition = new Vector3(this.text.rectTransform.anchoredPosition.x, this.text.rectTransform.anchoredPosition.y);
+    }
+
+    public void MoveEffect()
+    {
+        sinValue += Time.deltaTime * 3.0f;
+        float y = fixPosition.y + Mathf.Sin(sinValue) * 3.0f;
+
+        // RectTransform을 통해 위치 조정
+        text.rectTransform.anchoredPosition = new Vector2(text.rectTransform.anchoredPosition.x, y);
     }
 
     public Text GetText() { return text; }
@@ -25,6 +36,9 @@ public class TextShower
 
     private Text text = null;
     private string stringPeice = null;
+
+    private Vector2 fixPosition = Vector2.zero;
+    private float sinValue = 0.0f;
 }
 
 public class TextSystem : MonoBehaviour
@@ -33,6 +47,9 @@ public class TextSystem : MonoBehaviour
     {
         if (isRun == false)
             return;
+
+        foreach (TextShower textShower in textShowers)
+            textShower.MoveEffect();
 
         if (isSafeHome == false)
             return;
@@ -104,7 +121,7 @@ public class TextSystem : MonoBehaviour
 
         randomSet.Clear();
         while (randomSet.Count < textShowers.Count)
-            randomSet.Add(Random.Range(0, textShowers.Count));
+            randomSet.Add(UnityEngine.Random.Range(0, textShowers.Count));
 
         prevSelectedIndexArray = new int[textShowers.Count];
 
@@ -132,7 +149,7 @@ public class TextSystem : MonoBehaviour
         isRun = run;
     }
 
-    public Text[] textMesh;
+    public Text[] textMesh = new Text[36];
     private List<TextShower> textShowers = new List<TextShower>();
 
     // 텍스트 뽑는 방식
