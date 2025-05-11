@@ -580,7 +580,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3facc5d384304f689f221edd440b9e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  choiceText: {fileID: 247459040270983814}
   type: 0
+  choiceStr:
+  - "1\uC77C\uCC28"
+  - "2\uC77C\uCC28"
+  - "3\uC77C\uCC28"
+  - "4\uC77C\uCC28"
 --- !u!1 &2882336605127816312
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,7 +970,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3facc5d384304f689f221edd440b9e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  choiceText: {fileID: 685044113813650064}
   type: 2
+  choiceStr:
+  - "1\uC77C\uCC28"
+  - "2\uC77C\uCC28"
+  - "3\uC77C\uCC28"
+  - "4\uC77C\uCC28"
 --- !u!1 &6290436188980614593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,7 +1256,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3facc5d384304f689f221edd440b9e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  choiceText: {fileID: 5645173225799855440}
   type: 1
+  choiceStr:
+  - "1\uC77C\uCC28"
+  - "2\uC77C\uCC28"
+  - "3\uC77C\uCC28"
+  - "4\uC77C\uCC28"
 --- !u!1 &7249501793754911736
 GameObject:
   m_ObjectHideFlags: 0
