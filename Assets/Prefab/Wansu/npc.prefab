@@ -267,10 +267,14 @@ MonoBehaviour:
   stm: {fileID: 0}
   te: {fileID: 0}
   dialogues:
-  - "1\uC77C\uCC28 npc \uC120\uD0DD \uBB38\uC7A5"
-  - "2\uC77C\uCC28 npc \uC120\uD0DD \uBB38\uC7A5"
-  - "3\uC77C\uCC28 npc \uC120\uD0DD \uBB38\uC7A5"
-  - "4\uC77C\uCC28 npc \uC120\uD0DD \uBB38\uC7A5"
+  - npcText:
+    - "1\uC77C\uCC28 npc \uBB38\uC7A5"
+  - npcText:
+    - "2\uC77C\uCC28 npc \uBB38\uC7A5"
+  - npcText:
+    - "3\uC77C\uCC28 npc \uBB38\uC7A5"
+  - npcText:
+    - "4\uC77C\uCC28 npc \uBB38\uC7A5"
   npcName: "npc \uC774\uB984"
 --- !u!1 &1327624591476277540
 GameObject:

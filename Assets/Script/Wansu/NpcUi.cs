@@ -2,6 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class DailyNpcText
+{
+    public string[] npcText;
+}
 public class NpcUi : MonoBehaviour
 {
     public Text text;
@@ -13,9 +18,11 @@ public class NpcUi : MonoBehaviour
     public StoryManager stm;
     private Npc npc;
     public TypingEffect te;
-    public string[] dialogues;
+    public DailyNpcText[] dialogues;
     public string npcName;
     private string beforeYesButton;
+    private int index = 0;
+    private string[] nowText;
     private string yesButton = "어떤 조언을 할 것인가요?";
     private float[] yPositions = { 150f, 80f, 10f };
 
@@ -32,12 +39,22 @@ public class NpcUi : MonoBehaviour
         yesBtn.SetActive(false);
         noBtn.SetActive(false);
         npcNextBtn.SetActive(false);
-        StartCoroutine(te.TypeDialog(text, dialogues[MorningManager.Instance.date - 1], new List<GameObject> { npcNextBtn }));
+        nowText = dialogues[MorningManager.Instance.date - 1].npcText;
+        StartCoroutine(te.TypeDialog(text, nowText[index], new List<GameObject> { npcNextBtn }));
     }
     public void OnNpcNextClicked()
     {
-        npcNextBtn.SetActive(false);
-        StartCoroutine(te.TypeDialog(text, beforeYesButton, new List<GameObject> { yesBtn, noBtn }));
+        index++;
+        if (index < nowText.Length)
+        {
+            string str = nowText[index].Replace("\\n", "\n");
+            StartCoroutine(te.TypeDialog(text, str));
+        }
+        if (index == nowText.Length)
+        {
+            npcNextBtn.SetActive(false);
+            StartCoroutine(te.TypeDialog(text, beforeYesButton, new List<GameObject> { yesBtn, noBtn }));
+        }
     }
     public void OnYesClicked()
     {
