@@ -36,6 +36,7 @@ public class Mac : MonoBehaviour
     {
         if (collisionToHome)
             return;
+
         if (isSleep == false)
             return;
 
@@ -54,6 +55,7 @@ public class Mac : MonoBehaviour
         {
             collisionToHome = true;
             collisionWithHomeEvent(true);
+            isSleep = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -62,6 +64,7 @@ public class Mac : MonoBehaviour
         {
             collisionToHome = false;
             collisionWithHomeEvent(false);
+            isSleep = false;
         }
     }
     public void InitalizeMacEvent(Action<Mac> dieEvent, Action<bool> collisionWithHomeEvent)

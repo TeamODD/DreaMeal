@@ -107,6 +107,7 @@ MonoBehaviour:
   moveSpeed: 0.3
   hp: 4
   isRender: 0
+  isSleep: 0
 --- !u!61 &-7210819587954882201
 BoxCollider2D:
   m_ObjectHideFlags: 0

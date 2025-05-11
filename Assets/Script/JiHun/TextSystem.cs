@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,33 +14,64 @@ public class StringPeiceBundle
 }
 public class TextShower
 {
-    public TextShower(MonoBehaviour monoBehaviour, Text text, string stringPeice, float showTime)
+    public TextShower(Text text, string stringPeice)
     {
-        this.monoBehaviour = monoBehaviour;
         this.text = text;
         this.stringPeice = stringPeice;
-        this.showTime = showTime;
     }
-    public void Update()
+
+    public Text GetText() { return text; }
+    public string GetStringPeice() { return stringPeice; }
+
+    private Text text = null;
+    private string stringPeice = null;
+}
+
+public class TextSystem : MonoBehaviour
+{
+    private void Update()
     {
         if (isRun == false)
             return;
 
-        showTime -= Time.deltaTime;
-        if (showTime <= 0)
+        if (isSafeHome == false)
+            return;
+
+        currentProcessTime -= Time.deltaTime;
+
+        if (currentProcessTime <= 0)
         {
-            monoBehaviour.StartCoroutine(FadeInText());
-            showTime = 0.0f;
-            isRun = false;
+            TextShower textShower = null;
+            
+            if(selectedArraySavePoint != selectedArrayTop)
+            {
+                int textShowerIndex = prevSelectedIndexArray[selectedArraySavePoint++];
+                textShower = textShowers[textShowerIndex];
+            }
+            else
+            {
+                int textShowerIndex = randomSet.First();
+                randomSet.Remove(textShowerIndex);
+
+                textShower = textShowers[textShowerIndex];
+
+                prevSelectedIndexArray[selectedArrayTop++] = textShowerIndex;
+                selectedArraySavePoint += 1;
+            }
+            Text text = textShower.GetText();
+
+            string stringPeice = textShower.GetStringPeice();
+            StartCoroutine(FadeInText(text, stringPeice));
+
+            currentProcessTime = generateTime;
         }
+
+        if (randomSet.Count == 0)
+            isRun = false;
+
     }
-    public void PrintShowTime()
-    {
-        Debug.Log(showTime);
-    }
-    public bool IsRun() { return isRun; }
-    public float GetShowTime() { return showTime; }
-    private IEnumerator FadeInText()
+
+    private IEnumerator FadeInText(Text text, string stringPeice)
     {
         text.text = stringPeice;
         text.color = new Color(text.color.r, text.color.g, text.color.b, 0); // 투명하게 초기화
@@ -57,83 +87,69 @@ public class TextShower
 
         text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
     }
-    private MonoBehaviour monoBehaviour = null;
-    private Text text = null;
-    private string stringPeice = null;
-    private float showTime = 0.0f;
-    private float fadeDuration = 3.0f;
-    private bool isRun = true;
-}
 
-public class TextSystem : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void SetRenderString(string renderString)
     {
-        generateTimeMulSet = new HashSet<int>();
-        while (generateTimeMulSet.Count < textMesh.Length)
-            generateTimeMulSet.Add(Random.Range(0, textMesh.Length) + 1);
+        currentProcessTime = generateTime;
 
+        this.renderString = renderString;
+        this.stringPeiceBundle = new StringPeiceBundle(this.renderString);
 
-        stringPeiceBundles = new List<StringPeiceBundle>(renderStrings.Length);
-        foreach (string str in renderStrings)
-        {
-            stringPeiceBundles.Add(new StringPeiceBundle(str));
-        }
+        string[] peices = stringPeiceBundle.peices;
 
-        int renderString = 2;
-
-        string[] peices = stringPeiceBundles[renderString].peices;
-        textShowers = new List<TextShower>(peices.Length);
+        textShowers.Clear();
         for (int i = 0; i < peices.Length; i++)
-        {
-            int setElement = generateTimeMulSet.First();
-            generateTimeMulSet.Remove(setElement);
-            if (setElement == 0)
-            {
-                Debug.Log(setElement);
-            }
-            textShowers.Add(new TextShower(this, textMesh[i], peices[i], generateTime * setElement));
-        }
-    }
+            textShowers.Add(new TextShower(textMesh[i], peices[i]));
 
-    private void Update()
-    {
-        if (isSafeHome == false)
-            return;
 
-        GetMin();
+        randomSet.Clear();
+        while (randomSet.Count < textShowers.Count)
+            randomSet.Add(Random.Range(0, textShowers.Count));
 
-        foreach (TextShower textShower in textShowers)
-            textShower.Update();
-    }
+        prevSelectedIndexArray = new int[textShowers.Count];
 
-    private void GetMin()
-    {
-        int minIdx = 0;
-        for (int i = 0; i < textShowers.Count; i++) 
-        {
-            if (textShowers[i].IsRun() == false)
-                continue;
-            if (textShowers[i].GetShowTime() < textShowers[minIdx].GetShowTime())
-                minIdx = i;
-        }
-        generateTimeText.text = textShowers[minIdx].GetShowTime().ToString();
+        selectedArrayTop = 0;
+        selectedArraySavePoint = selectedArrayTop;
+
+        isRun = true;
     }
     public void IsSafeHome(bool isSafeHome)
     {
         this.isSafeHome = isSafeHome;
     }
+    public void HidePrevText()
+    {
+        if (selectedArraySavePoint <= 0)
+            return;
+
+        int prevIndex = prevSelectedIndexArray[--selectedArraySavePoint];
+
+        textShowers[prevIndex].GetText().text = "";
+    }
+
+    public void ShouldRun(bool run)
+    {
+        isRun = run;
+    }
 
     public Text[] textMesh;
-    private List<TextShower> textShowers = null;
+    private List<TextShower> textShowers = new List<TextShower>();
 
-    public string[] renderStrings;
-    private List<StringPeiceBundle> stringPeiceBundles = null;
+    // 텍스트 뽑는 방식
+    private int[] prevSelectedIndexArray = null;
+    private int selectedArrayTop = 0;
+    private int selectedArraySavePoint = 0;
+
+    private string renderString = null;
+    private StringPeiceBundle stringPeiceBundle = null;
 
     public float generateTime;
-    private HashSet<int> generateTimeMulSet = null;
+    private float currentProcessTime = 0.0f;
+    private HashSet<int> randomSet = new HashSet<int>();
 
-    public Text generateTimeText;
     private bool isSafeHome = true;
+
+    public float fadeDuration = 3.0f;
+
+    private bool isRun = false;
 }

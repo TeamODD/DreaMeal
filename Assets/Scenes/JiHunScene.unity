@@ -735,6 +735,28 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
+--- !u!95 &213545205
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213545198}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2a43529196a3ac64c940a8eb6da818b6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &247407610
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,7 +1024,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4443272}
-  - {fileID: 405985737}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &327968340 stripped
@@ -1126,11 +1147,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
---- !u!4 &405985737 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1489623237020688414, guid: 5bee0cd52644718468552bcf4b0d831b, type: 3}
-  m_PrefabInstance: {fileID: 2627578116931191950}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &436782682
 GameObject:
   m_ObjectHideFlags: 0
@@ -2437,10 +2453,13 @@ MonoBehaviour:
   - {fileID: 742497183}
   - {fileID: 436782682}
   - {fileID: 343595507}
+  numberOfGenerateMac: 1
+  ratioOfStrongMac: 50
   wakeUp: {fileID: 326170179}
   sleep: {fileID: 718752283}
   timerText: {fileID: 87221277}
   nightTime: 5000
+  sponeTime: 3
 --- !u!4 &1962857368
 Transform:
   m_ObjectHideFlags: 0
@@ -2788,6 +2807,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4526428809929227503, guid: abe192be1e9b0364b8c33e938be58b28, type: 3}
       insertIndex: -1
       addedObject: {fileID: 213545203}
+    - targetCorrespondingSourceObject: {fileID: 4526428809929227503, guid: abe192be1e9b0364b8c33e938be58b28, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 213545205}
   m_SourcePrefab: {fileID: 100100000, guid: abe192be1e9b0364b8c33e938be58b28, type: 3}
 --- !u!1001 &2627578116931191950
 PrefabInstance:
@@ -2795,7 +2817,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 326170180}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1489623237020688414, guid: 5bee0cd52644718468552bcf4b0d831b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2872,8 +2894,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1051440810220336858, guid: e5cd8472b7b646a4e93e952de7e5f838, type: 3}
+      propertyPath: fadeDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1051440810220336858, guid: e5cd8472b7b646a4e93e952de7e5f838, type: 3}
       propertyPath: generateTime
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1051440810220336858, guid: e5cd8472b7b646a4e93e952de7e5f838, type: 3}
       propertyPath: generateTimeText
@@ -3009,3 +3035,4 @@ SceneRoots:
   - {fileID: 326170180}
   - {fileID: 718752284}
   - {fileID: 203392725}
+  - {fileID: 2627578116931191950}

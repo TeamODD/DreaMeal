@@ -13,7 +13,14 @@ public class Home : MonoBehaviour
             myConditionIsSafe(true);
     }
 
+    public void IsCollisionWithStrongMac(bool isCollision)
+    {
+        IsCollisionWithMac(isCollision);
+        collisionWithStrongMac();
+    }
+
     public Action<bool> myConditionIsSafe;
+    public Action collisionWithStrongMac;
 
     private int collisionMacCount = 0;
 }
