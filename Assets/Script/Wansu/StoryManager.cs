@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class DailyStory
@@ -89,21 +90,19 @@ public class StoryManager : MonoBehaviour
     public void OnNextClicked()
     {
         storyIndex++;
+        nextBtn.SetActive(false);
         if (storyIndex < nowStoryTexts.Length)
         {
             string str = nowStoryTexts[storyIndex].Replace("\\n", "\n");
             if (storyIndex == nowStoryTexts.Length - 1)
             {
-                nextBtn.SetActive(false);
-                // storyImage.sprite = nowStoryImages[storyIndex];
                 StartCoroutine(gradationAnimate.FadeImageWhite(storyImage, nowStoryImages[storyIndex]));
                 StartCoroutine(te.TypeDialog(text, str, new List<GameObject> { endBtn }));
             }
             else
             {
-                // storyImage.sprite = nowStoryImages[storyIndex];
                 StartCoroutine(gradationAnimate.FadeImageWhite(storyImage, nowStoryImages[storyIndex]));
-                StartCoroutine(te.TypeDialog(text, str));
+                StartCoroutine(te.TypeDialog(text, str,  new List<GameObject> { nextBtn }));
             }
         }
     }
@@ -114,5 +113,6 @@ public class StoryManager : MonoBehaviour
         npc.ResetChoose();
         storyImage.sprite = null;
         gameObject.SetActive(false);
+        SceneManager.LoadScene("JiHunScene");
     }
 }
