@@ -40,15 +40,17 @@ public class NpcUi : MonoBehaviour
         noBtn.SetActive(false);
         npcNextBtn.SetActive(false);
         nowText = dialogues[MorningManager.Instance.date - 1].npcText;
+        index = 0;
         StartCoroutine(te.TypeDialog(text, nowText[index], new List<GameObject> { npcNextBtn }));
     }
     public void OnNpcNextClicked()
     {
         index++;
+        npcNextBtn.SetActive(false);
         if (index < nowText.Length)
         {
             string str = nowText[index].Replace("\\n", "\n");
-            StartCoroutine(te.TypeDialog(text, str));
+            StartCoroutine(te.TypeDialog(text, str, new List<GameObject> { npcNextBtn }));
         }
         if (index == nowText.Length)
         {

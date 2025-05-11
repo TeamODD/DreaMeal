@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JiHunScene.unity
     guid: 646e71acf36c8224997d6de925b8c80b
+  - enabled: 1
+    path: Assets/Scenes/Morning.unity
+    guid: 067840de98cc44d14a42e28389fc2ebe
   - enabled: 0
     path: Assets/Scenes/Night_WakeUp.unity
     guid: e935a4e6242cadb4ebd6de4a4abe244c
