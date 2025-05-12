@@ -16,6 +16,8 @@ public class Home : MonoBehaviour
     public void IsCollisionWithStrongMac(bool isCollision)
     {
         IsCollisionWithMac(isCollision);
+        if (isCollision == false)
+            return;
         collisionWithStrongMac();
     }
 

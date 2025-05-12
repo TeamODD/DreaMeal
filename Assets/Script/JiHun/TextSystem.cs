@@ -24,8 +24,8 @@ public class TextShower
 
     public void MoveEffect()
     {
-        sinValue += Time.deltaTime * 3.0f;
-        float y = fixPosition.y + Mathf.Sin(sinValue) * 3.0f;
+        sinValue += Time.deltaTime * UnityEngine.Random.Range(1, 4);
+        float y = fixPosition.y + Mathf.Sin(sinValue) * 2.5f;
 
         // RectTransform을 통해 위치 조정
         text.rectTransform.anchoredPosition = new Vector2(text.rectTransform.anchoredPosition.x, y);
@@ -78,7 +78,8 @@ public class TextSystem : MonoBehaviour
             Text text = textShower.GetText();
 
             string stringPeice = textShower.GetStringPeice();
-            StartCoroutine(FadeInText(text, stringPeice));
+            text.color = Color.white;
+            StartCoroutine(TextFader.FadeInText(text, stringPeice, fadeDuration));
 
             currentProcessTime = generateTime;
         }
@@ -86,23 +87,6 @@ public class TextSystem : MonoBehaviour
         if (randomSet.Count == 0)
             isRun = false;
 
-    }
-
-    private IEnumerator FadeInText(Text text, string stringPeice)
-    {
-        text.text = stringPeice;
-        text.color = new Color(text.color.r, text.color.g, text.color.b, 0); // 투명하게 초기화
-        float elapsedTime = 0f;
-
-        while (elapsedTime < fadeDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            float alpha = elapsedTime / fadeDuration;
-            text.color = new Color(text.color.r, text.color.g, text.color.b, alpha); // 점점 밝게
-            yield return null;
-        }
-
-        text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
     }
 
     public void SetRenderString(string renderString)
@@ -140,7 +124,6 @@ public class TextSystem : MonoBehaviour
             return;
 
         int prevIndex = prevSelectedIndexArray[--selectedArraySavePoint];
-
         textShowers[prevIndex].GetText().text = "";
     }
 
@@ -164,9 +147,9 @@ public class TextSystem : MonoBehaviour
     private float currentProcessTime = 0.0f;
     private HashSet<int> randomSet = new HashSet<int>();
 
-    private bool isSafeHome = true;
+    public float fadeDuration;
 
-    public float fadeDuration = 3.0f;
+    private bool isSafeHome = true;
 
     private bool isRun = false;
 }

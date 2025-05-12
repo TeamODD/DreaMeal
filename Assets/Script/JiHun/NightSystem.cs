@@ -2,7 +2,45 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
+public class TextFader
+{
+    // text색깔은 미리 정해서
+    public static IEnumerator FadeInText(Text text, string str, float fadeDuration)
+    {
+        text.text = str;
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 0); // 투명하게 초기화
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = elapsedTime / fadeDuration;
+            text.color = new Color(text.color.r, text.color.g, text.color.b, alpha); // 점점 밝게
+            yield return null;
+        }
+
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
+    }
+
+    public static IEnumerator FadeOutText(Text text, string str, float fadeDuration)
+    {
+        text.text = str;
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 1.0f); // 투명하게 초기화
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(1.0f, 0.0f, elapsedTime / fadeDuration);
+            text.color = new Color(text.color.r, text.color.g, text.color.b, alpha); // 점점 밝게
+            yield return null;
+        }
+
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 0.0f);
+    }
+}
 public class NightSystem : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -13,7 +51,9 @@ public class NightSystem : MonoBehaviour
         else
             date = MorningManager.Instance.date;
 
-        date = 1;
+        dateShowerText.text = (date + 1).ToString() + "일차 밤";
+        dateShowerText.color = Color.white;
+        StartCoroutine(TextFader.FadeOutText(dateShowerText, dateShowerText.text, 3.0f));
 
         if (100 < ratioOfStrongMac)
             ratioOfStrongMac = 100;
@@ -50,6 +90,10 @@ public class NightSystem : MonoBehaviour
         if (numberOfGenerateMac <= macObjects.Count)
             return;
 
+        // 꿈 상태일 때만 맥 생성
+        if (isSleep == false)
+            return;
+
         sumTime += Time.deltaTime;
         if (sumTime > sponeTime)
         {
@@ -64,7 +108,10 @@ public class NightSystem : MonoBehaviour
             // 4분의1확률로 강한맥을 만듦
             int random = Random.Range(0, 100);
             if (random <= ratioOfStrongMac)
+            {
                 mac.InitalizeMacEvent(MacIsDie, userHome.IsCollisionWithStrongMac);
+                mac.GetComponent<SpriteRenderer>().sprite = strongMacSprite;
+            }
             else
                 mac.InitalizeMacEvent(MacIsDie, userHome.IsCollisionWithMac);
             mac.RenderEnable(!isSleep);
@@ -134,6 +181,10 @@ public class NightSystem : MonoBehaviour
     public float sponeTime;
     private float sumTime = 0.0f;
 
+    public Sprite strongMacSprite;
+
     public string[] renderStrings;
     private int date = 0;
+
+    public Text dateShowerText;
 }
