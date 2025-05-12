@@ -24,9 +24,9 @@ public class Mac : MonoBehaviour
     }
     public void Hitted()
     {
-        if (hp > 0)
-            hp -= 1;
-        else
+        Debug.Log("Hitted");
+        hp -= 1;
+        if(hp <=0)
         {
             dieEvent(this);
             Destroy(gameObject);
