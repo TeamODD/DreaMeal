@@ -17,6 +17,8 @@ public class DailyStory
 }
 public class StoryManager : MonoBehaviour
 {
+    public GameObject endUi;
+    public GameObject map;
     public TypingEffect te;
     public GradationAnimate gradationAnimate;
     public Text text;
@@ -83,7 +85,6 @@ public class StoryManager : MonoBehaviour
         storyImage.gameObject.SetActive(true);
         storyIndex = 0;
         string str = nowStoryTexts[storyIndex].Replace("\\n", "\n");
-        //storyImage.sprite = nowStoryImages[storyIndex];
         StartCoroutine(gradationAnimate.FadeImageWhite(storyImage, nowStoryImages[storyIndex]));
         StartCoroutine(te.TypeDialog(text, str, new List<GameObject> { nextBtn })); 
     }
@@ -112,6 +113,8 @@ public class StoryManager : MonoBehaviour
         npc.textUi.gameObject.SetActive(false);
         npc.ResetChoose();
         storyImage.sprite = null;
+        map.SetActive(true);
+        endUi.SetActive(true);
         gameObject.SetActive(false);
         SceneManager.LoadScene("JiHunScene");
     }

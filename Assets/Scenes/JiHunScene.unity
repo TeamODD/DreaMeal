@@ -3902,7 +3902,7 @@ MonoBehaviour:
   wakeUp: {fileID: 326170179}
   sleep: {fileID: 718752283}
   timerText: {fileID: 87221277}
-  nightTime: 5000
+  nightTime: 5
   sponeTime: 3
   renderStrings:
   - "\uC232\uC774 \uBD80\uB974\uB294 \uC18C\uB9AC\uC5D0 \uC774\uB04C\uB9B0 \uC774\uB294

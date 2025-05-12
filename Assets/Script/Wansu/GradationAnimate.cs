@@ -47,7 +47,7 @@ public class GradationAnimate : MonoBehaviour
             for (float t = 0; t < duration; t += Time.deltaTime)
             {
                 if (skipFade) break;
-                img.color = new Color(1, 1, 1,  t / duration);
+                img.color = new Color(1, 1, 1, t / duration);
                 yield return null;
             }
             img.color = new Color(1, 1, 1, 1f);
