@@ -11,8 +11,8 @@ public class ResetMorningMap : MonoBehaviour
     public StoryManager stm;
     public GameObject resetUi;
     public Image background;
-    public float duration = 0.5f;
-    public IEnumerator FadeIn(Image img)
+    public float duration = 1f;
+    public IEnumerator FadeOut(Image img)
     {
         for (float t = 0; t < duration; t += Time.deltaTime)
         {
@@ -47,7 +47,7 @@ public class ResetMorningMap : MonoBehaviour
             v.SetActive(false);
         }
         stm.gameObject.SetActive(false);
-        StartCoroutine(FadeIn(background));
+        StartCoroutine(FadeOut(background));
         MorningManager.Instance.NextDay();
     }
 }

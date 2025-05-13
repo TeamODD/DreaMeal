@@ -1783,7 +1783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2859,7 +2859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39f3bcfca2dd4a008feec89b4b4b810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.5
+  duration: 1
 --- !u!4 &1511559600
 Transform:
   m_ObjectHideFlags: 0
@@ -3253,6 +3253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3572d1aae93b41379029d659c151a34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endImg: {fileID: 1110235836}
   endUi: {fileID: 151891030}
   map: {fileID: 66576190}
   te: {fileID: 1149194154}
@@ -3724,7 +3725,7 @@ MonoBehaviour:
   stm: {fileID: 1589180858}
   resetUi: {fileID: 987674805}
   background: {fileID: 763964853}
-  duration: 0.5
+  duration: 1
 --- !u!114 &1863389687 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7203255792631785752, guid: 6b290f798eedb47c89bb97e99df7e932, type: 3}
