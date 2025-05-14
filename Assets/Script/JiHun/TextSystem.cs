@@ -81,7 +81,7 @@ public class TextSystem : MonoBehaviour
             text.color = Color.white;
             StartCoroutine(TextFader.FadeInText(text, stringPeice, fadeDuration));
 
-            currentProcessTime = generateTime;
+            currentProcessTime = UnityEngine.Random.Range(2, generateTime);
         }
 
         if (randomSet.Count == 0)

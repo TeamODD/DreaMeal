@@ -50,6 +50,7 @@ public class Mac : MonoBehaviour
         hp -= 1;
         if(hp <=0)
         {
+            isDestroy = true;
             StartCoroutine(FadeAndDestroy());
         }
     }
@@ -125,4 +126,7 @@ public class Mac : MonoBehaviour
     public bool isSleep = false;
 
     private SpriteRenderer spriteRenderer = null;
+
+    public bool isDestroy = false;
+
 }

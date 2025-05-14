@@ -55,10 +55,10 @@ public class NightSystem : MonoBehaviour
         dateShowerText.color = Color.white;
         StartCoroutine(TextFader.FadeOutText(dateShowerText, dateShowerText.text, 3.0f));
 
-        if (100 < ratioOfStrongMac)
-            ratioOfStrongMac = 100;
-        else if (ratioOfStrongMac < 0)
-            ratioOfStrongMac = 0;
+        if (100 < ratioOfStrongMac[date])
+            ratioOfStrongMac[date] = 100;
+        else if (ratioOfStrongMac[date] < 0)
+            ratioOfStrongMac[date] = 0;
 
         string renderString = renderStrings[date];
         textSystem.SetRenderString(renderString);
@@ -67,6 +67,8 @@ public class NightSystem : MonoBehaviour
         userHome.collisionWithStrongMac = textSystem.HidePrevText;
 
         ChangeToDream();
+
+        realSponeTime = sponeTime[date] / 2.0f;
     }
 
     // Update is called once per frame
@@ -87,7 +89,7 @@ public class NightSystem : MonoBehaviour
                     ChangeToDream();    // 이걸 저기 위에서도 쓰고있어서 무조건 이렇게
         }
 
-        if (numberOfGenerateMac <= macObjects.Count)
+        if (numberOfGenerateMac[date] <= sumOfMac)
             return;
 
         // 꿈 상태일 때만 맥 생성
@@ -95,35 +97,42 @@ public class NightSystem : MonoBehaviour
             return;
 
         sumTime += Time.deltaTime;
-        if (sumTime > sponeTime)
+        if (sumTime > realSponeTime)
         {
             sumTime = 0.0f;
-            int sponerSize = sponers.Length;
-            int randomSponerIndex = Random.Range(0, sponerSize);
-            Transform sponerTransform = sponers[randomSponerIndex].transform;
+            realSponeTime = sponeTime[date];
 
-            GameObject newObject = Instantiate(macPrefab, sponerTransform);
-            Mac mac = newObject.GetComponent<Mac>();
-
-            // 4분의1확률로 강한맥을 만듦
-            int random = Random.Range(0, 100);
-            if (random <= ratioOfStrongMac)
-            {
-                mac.InitalizeMacEvent(MacIsDie, userHome.IsCollisionWithStrongMac);
-                mac.GetComponent<SpriteRenderer>().sprite = strongMacSprite;
-            }
-            else
-                mac.InitalizeMacEvent(MacIsDie, userHome.IsCollisionWithMac);
-            mac.RenderEnable(!isSleep);
-            mac.isSleep = isSleep;
-            macObjects.Add(mac);
-
+            SpownMac(isSleep);
+            sumOfMac += 1;
         }
 
     }
+    private void SpownMac(bool sleep)
+    {
+        int sponerSize = sponers.Length;
+        int randomSponerIndex = Random.Range(0, sponerSize);
+        Transform sponerTransform = sponers[randomSponerIndex].transform;
+
+        GameObject newObject = Instantiate(macPrefab, sponerTransform);
+        Mac mac = newObject.GetComponent<Mac>();
+
+        int random = Random.Range(0, 100);
+        if (random <= ratioOfStrongMac[date])
+        {
+            mac.InitalizeMacEvent(MacIsDie, userHome.IsCollisionWithStrongMac);
+            mac.GetComponent<SpriteRenderer>().sprite = strongMacSprite;
+        }
+        else
+            mac.InitalizeMacEvent(MacIsDie, userHome.IsCollisionWithMac);
+        mac.RenderEnable(!sleep);
+        mac.isSleep = sleep;
+        macObjects.Add(mac);
+    }
+
     private void MacIsDie(Mac mac)
     {
         macObjects.Remove(mac);
+        SpownMac(isSleep);
     }
     private void ChangeToDream()
     {
@@ -169,22 +178,26 @@ public class NightSystem : MonoBehaviour
     public GameObject[] sponers;
 
     private List<Mac> macObjects = new List<Mac>();
-    public int numberOfGenerateMac;
-    public int ratioOfStrongMac;
 
     public GameObject wakeUp;
     public GameObject sleep;
     private bool isSleep = false;
 
     public Text timerText;
-    public float nightTime;
-    public float sponeTime;
     private float sumTime = 0.0f;
 
     public Sprite strongMacSprite;
 
     public string[] renderStrings;
+    public int[] numberOfGenerateMac;
+    public int[] ratioOfStrongMac;
+    public float[] sponeTime;
+    private float realSponeTime;
+    public float nightTime;
+
     private int date = 0;
 
     public Text dateShowerText;
+
+    private int sumOfMac = 0;
 }

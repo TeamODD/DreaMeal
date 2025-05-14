@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             Mac macMove = enemy.GetComponent<Mac>();
-            if (enemy.CompareTag("Enemy") && enemy.isTrigger == false) // 적 태그 확인
+            if (enemy.CompareTag("Enemy") && enemy.isTrigger == false && macMove.isDestroy == false) // 적 태그 확인
             {
                 macMove.Hitted();
             }
