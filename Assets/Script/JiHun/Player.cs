@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     }
     void Attack()
     {
-        Debug.Log("Attack");
         float attackRange = 0.5f; // 공격 범위
         Vector2 attackPosition = new Vector2(transform.position.x + direction.x, transform.position.y + direction.y);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPosition, attackRange);

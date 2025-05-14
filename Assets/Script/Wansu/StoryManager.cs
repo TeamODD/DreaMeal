@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,8 @@ public class DailyStory
 }
 public class StoryManager : MonoBehaviour
 {
+    public float duration = 0.5f;
+    public Image endImg;
     public GameObject endUi;
     public GameObject map;
     public TypingEffect te;
@@ -107,15 +110,25 @@ public class StoryManager : MonoBehaviour
             }
         }
     }
-    public void OnEndClicked()
+    public IEnumerator GoToNight(Image img)
     {
+        for (float t = 0; t < duration; t += Time.deltaTime)
+        {
+            img.color = new Color(0, 0, 0, t / duration);
+            yield return null;
+        }
+        img.color = new Color(0, 0, 0, 1);
         npc.villageManager.ResetCamera();
         npc.textUi.gameObject.SetActive(false);
         npc.ResetChoose();
         storyImage.sprite = null;
-        map.SetActive(true);
-        endUi.SetActive(true);
         gameObject.SetActive(false);
         SceneManager.LoadScene("JiHunScene");
+    }
+    public void OnEndClicked()
+    {
+        map.SetActive(true);
+        endUi.SetActive(true);
+        StartCoroutine(GoToNight(endImg));
     }
 }

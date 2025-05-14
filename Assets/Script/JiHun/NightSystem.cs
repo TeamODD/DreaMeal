@@ -84,7 +84,7 @@ public class NightSystem : MonoBehaviour
                 ChangeToWakeUp();
             else
                 if (player.IsInDoor())
-                ChangeToDream();    // 이걸 저기 위에서도 쓰고있어서 무조건 이렇게
+                    ChangeToDream();    // 이걸 저기 위에서도 쓰고있어서 무조건 이렇게
         }
 
         if (numberOfGenerateMac <= macObjects.Count)

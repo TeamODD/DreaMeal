@@ -4347,7 +4347,7 @@ MonoBehaviour:
   wakeUp: {fileID: 326170179}
   sleep: {fileID: 718752283}
   timerText: {fileID: 87221277}
-  nightTime: 5
+  nightTime: 5000
   sponeTime: 3
   strongMacSprite: {fileID: 454570650581173772, guid: 66cb9edc698f2dc458f8f0cce12d6fb9, type: 3}
   renderStrings:
