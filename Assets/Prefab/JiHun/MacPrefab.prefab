@@ -104,10 +104,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   home: {fileID: 5175463562789001497, guid: 5bee0cd52644718468552bcf4b0d831b, type: 3}
-  moveSpeed: 0.3
+  moveSpeed: 0.2
   hp: 4
   isRender: 0
   isSleep: 0
+  isDestroy: 0
 --- !u!61 &-7210819587954882201
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -146,13 +147,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.3580003, y: 2.730939}
+    oldSize: {x: 3.112857, y: 1.9506705}
     newSize: {x: 4.3580003, y: 2.730939}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 4, y: 2}
+  m_Size: {x: 2.7, y: 1}
   m_EdgeRadius: 0
 --- !u!61 &6557702411420900544
 BoxCollider2D:
@@ -192,13 +193,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.3580003, y: 2.730939}
+    oldSize: {x: 3.112857, y: 1.9506705}
     newSize: {x: 4.3580003, y: 2.730939}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 4, y: 2}
+  m_Size: {x: 2.7, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &-2689028283130886433
 Rigidbody2D:

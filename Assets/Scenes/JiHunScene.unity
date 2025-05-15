@@ -284,7 +284,7 @@ Transform:
   m_GameObject: {fileID: 77122913}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.24, y: 0, z: 0}
   m_LocalScale: {x: 20.61084, y: 10.440504, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -846,43 +846,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &213545202
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 213545198}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
-  m_Direction: 0
 --- !u!70 &213545203
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -942,6 +905,43 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &213545209
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213545198}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 1.76875}
+  m_Direction: 0
 --- !u!1 &247407610
 GameObject:
   m_ObjectHideFlags: 0
@@ -4443,15 +4443,26 @@ MonoBehaviour:
     \uB118\uC5B4\uAC14\uC5B4\uC694. \uC774\uC804\uC5D0 \uBB3C\uAC74\uC758 \uC8FC\uC778\uC774\uC5C8\uB358
     \uC774\uB294 \uADF8\uAC83\uC758 \uACC1\uC5D0 \uC788\uB294 \uC774\uB97C \uB3C4\uB451\uC73C\uB85C
     \uC0DD\uAC01\uD558\uACE0 \uB300\uAC00\uB97C \uCE58\uB974\uAC8C \uD560\uAC70\uB78D\uB2C8\uB2E4."
-  - "\uC544\uB2C8\uC57C \uB098\uB294 \uBAA8\uB974\uACA0\uC5B4"
-  numberOfGenerateMac: 0a0000000a0000000a0000000a000000
-  ratioOfStrongMac: 00000000000000003200000032000000
+  - "\uAE4A\uACE0 \uAE4A\uC740 \uBC24\uAE4C\uC9C0 \uC790\uC2E0\uC758 \uC790\uB9AC\uB97C
+    \uC9C0\uCF30\uB358 \uC774\uB294 \uADF8\uB807\uC9C0 \uC54A\uC558\uB358 \uC232\uC758
+    \uBC97\uACFC \uB9C8\uC8FC\uD558\uAC8C \uB418\uC5C8\uC5B4\uC694. \uC232\uC758
+    \uBC97\uC744 \uC595\uBCF4\uAC70\uB098 \uC2E4 \uC5C6\uB294 \uB18D\uB2F4\uC5D0
+    \uADC0\uB97C \uAE30\uC6B8\uC778\uB2E4\uBA74 \uB354 \uC774\uC0C1 \uC790\uC2E0\uC758
+    \uC790\uB9AC\uB97C \uC9C0\uD0AC \uC218 \uC5C6\uC744 \uAC70\uC5D0\uC694."
+  - "\uAE34 \uC2DC\uAC04\uB3D9\uC548 \uC2E4\uB0B1 \uAC19\uC740 \uBC14\uB78C\uC870\uCC28
+    \uB2FF\uC9C0 \uC54A\uB358 \uACF3\uC5D0 \uC0B4\uACE0 \uC788\uB358 \uAC83\uC744
+    \uD0D0\uD558\uB294 \uC774\uB294 \uB2E4\uC2DC\uB294 \uBC14\uB78C\uACFC \uB2FF\uC744
+    \uC218 \uC5C6\uAC8C \uB418\uC5C8\uB2F5\uB2C8\uB2E4. \uD0D0\uD558\uB824\uB294
+    \uC758\uC9C0\uAC00 \uAEBE\uC774\uC9C0\uB294 \uC54A\uACA0\uC9C0\uB9CC \uB2E4\uB978
+    \uAC83\uC774\uB77C\uBA74 \uAEBE\uC77C \uC218 \uC788\uC744\uC9C0\uB3C4 \uBAB0\uB77C\uC694."
+  numberOfGenerateMac: 03000000040000000400000004000000
+  ratioOfStrongMac: 00000000000000001900000032000000
   sponeTime:
-  - 10
-  - 10
-  - 10
-  - 10
-  nightTime: 3
+  - 15
+  - 15
+  - 15
+  - 15
+  nightTime: 200
   dateShowerText: {fileID: 717340646}
   fadeInBackGround: {fileID: 77122913}
 --- !u!4 &1962857368
@@ -4746,7 +4757,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 396303364398505635, guid: abe192be1e9b0364b8c33e938be58b28, type: 3}
       propertyPath: moveSpeed
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4526428809929227503, guid: abe192be1e9b0364b8c33e938be58b28, type: 3}
       propertyPath: m_Name
@@ -4814,9 +4825,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4526428809929227503, guid: abe192be1e9b0364b8c33e938be58b28, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 213545202}
-    - targetCorrespondingSourceObject: {fileID: 4526428809929227503, guid: abe192be1e9b0364b8c33e938be58b28, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 213545201}
     - targetCorrespondingSourceObject: {fileID: 4526428809929227503, guid: abe192be1e9b0364b8c33e938be58b28, type: 3}
       insertIndex: -1
@@ -4824,6 +4832,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4526428809929227503, guid: abe192be1e9b0364b8c33e938be58b28, type: 3}
       insertIndex: -1
       addedObject: {fileID: 213545207}
+    - targetCorrespondingSourceObject: {fileID: 4526428809929227503, guid: abe192be1e9b0364b8c33e938be58b28, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 213545209}
   m_SourcePrefab: {fileID: 100100000, guid: abe192be1e9b0364b8c33e938be58b28, type: 3}
 --- !u!1001 &2627578116931191950
 PrefabInstance:
@@ -4839,7 +4850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1489623237020688414, guid: 5bee0cd52644718468552bcf4b0d831b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.325
+      value: 0.8268311
       objectReference: {fileID: 0}
     - target: {fileID: 1489623237020688414, guid: 5bee0cd52644718468552bcf4b0d831b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4847,7 +4858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1489623237020688414, guid: 5bee0cd52644718468552bcf4b0d831b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.33
+      value: 0.332
       objectReference: {fileID: 0}
     - target: {fileID: 1489623237020688414, guid: 5bee0cd52644718468552bcf4b0d831b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4929,7 +4940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1051440810220336858, guid: e5cd8472b7b646a4e93e952de7e5f838, type: 3}
       propertyPath: generateTime
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1051440810220336858, guid: e5cd8472b7b646a4e93e952de7e5f838, type: 3}
       propertyPath: generateTimeText

@@ -66,7 +66,6 @@ public class Mac : MonoBehaviour
     }
     public void Hitted()
     {
-        Debug.Log("Hitted");
         hp -= 1;
         if(hp <=0)
         {
@@ -82,7 +81,6 @@ public class Mac : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Die");
         dieEvent(this);
         Destroy(gameObject);
     }
@@ -108,9 +106,10 @@ public class Mac : MonoBehaviour
     {
         isRender = beRender;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "UserHome" && collisionToHome == false)
+        if (collision.gameObject.tag == "UserHome" && collisionToHome == false)
         {
             collisionToHome = true;
             collisionWithHomeEvent(true);
