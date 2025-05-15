@@ -19,7 +19,7 @@ public class TextShower
     {
         this.text = text;
         this.stringPeice = stringPeice;
-        fixPosition = new Vector3(this.text.rectTransform.anchoredPosition.x, this.text.rectTransform.anchoredPosition.y);
+        fixPosition = new Vector2(this.text.rectTransform.anchoredPosition.x, this.text.rectTransform.anchoredPosition.y);
     }
 
     public void MoveEffect()
@@ -29,6 +29,7 @@ public class TextShower
 
         // RectTransform을 통해 위치 조정
         text.rectTransform.anchoredPosition = new Vector2(text.rectTransform.anchoredPosition.x, y);
+        
     }
 
     public Text GetText() { return text; }
@@ -81,7 +82,7 @@ public class TextSystem : MonoBehaviour
             text.color = Color.white;
             StartCoroutine(TextFader.FadeInText(text, stringPeice, fadeDuration));
 
-            currentProcessTime = generateTime;
+            currentProcessTime = UnityEngine.Random.Range(2, generateTime);
         }
 
         if (randomSet.Count == 0)

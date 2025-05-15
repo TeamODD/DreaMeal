@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -17,8 +18,9 @@ public class DailyStory
 }
 public class StoryManager : MonoBehaviour
 {
+    public float duration = 2f;
+    public Image endImg;
     public GameObject endUi;
-    public GameObject map;
     public TypingEffect te;
     public GradationAnimate gradationAnimate;
     public Text text;
@@ -85,7 +87,7 @@ public class StoryManager : MonoBehaviour
         storyImage.gameObject.SetActive(true);
         storyIndex = 0;
         string str = nowStoryTexts[storyIndex].Replace("\\n", "\n");
-        StartCoroutine(gradationAnimate.FadeImageWhite(storyImage, nowStoryImages[storyIndex]));
+        StartCoroutine(gradationAnimate.FadeImage(storyImage, nowStoryImages[storyIndex]));
         StartCoroutine(te.TypeDialog(text, str, new List<GameObject> { nextBtn })); 
     }
     public void OnNextClicked()
@@ -97,25 +99,41 @@ public class StoryManager : MonoBehaviour
             string str = nowStoryTexts[storyIndex].Replace("\\n", "\n");
             if (storyIndex == nowStoryTexts.Length - 1)
             {
-                StartCoroutine(gradationAnimate.FadeImageWhite(storyImage, nowStoryImages[storyIndex]));
+                StartCoroutine(gradationAnimate.FadeImage(storyImage, nowStoryImages[storyIndex]));
                 StartCoroutine(te.TypeDialog(text, str, new List<GameObject> { endBtn }));
             }
             else
             {
-                StartCoroutine(gradationAnimate.FadeImageWhite(storyImage, nowStoryImages[storyIndex]));
+                StartCoroutine(gradationAnimate.FadeImage(storyImage, nowStoryImages[storyIndex]));
                 StartCoroutine(te.TypeDialog(text, str,  new List<GameObject> { nextBtn }));
             }
         }
     }
-    public void OnEndClicked()
+    public IEnumerator GoToNight(Image img)
     {
+        for (float t = 0; t < duration; t += Time.deltaTime)
+        {
+            img.color = new Color(0, 0, 0, t / duration);
+            yield return null;
+        }
+        img.color = new Color(0, 0, 0, 1);
         npc.villageManager.ResetCamera();
         npc.textUi.gameObject.SetActive(false);
         npc.ResetChoose();
         storyImage.sprite = null;
-        map.SetActive(true);
-        endUi.SetActive(true);
         gameObject.SetActive(false);
         SceneManager.LoadScene("JiHunScene");
+    }
+    public void OnEndClicked()
+    {
+        if (MorningManager.Instance.date == 4)
+        {
+            SceneManager.LoadScene("OpeningEnding");
+        }
+        else
+        {
+            endUi.SetActive(true);
+            StartCoroutine(GoToNight(endImg));
+        }
     }
 }

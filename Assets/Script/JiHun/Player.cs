@@ -9,14 +9,13 @@ public class Player : MonoBehaviour
     }
     void Attack()
     {
-        Debug.Log("Attack");
         float attackRange = 0.5f; // 공격 범위
         Vector2 attackPosition = new Vector2(transform.position.x + direction.x, transform.position.y + direction.y);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPosition, attackRange);
         foreach (Collider2D enemy in hitEnemies)
         {
             Mac macMove = enemy.GetComponent<Mac>();
-            if (enemy.CompareTag("Enemy") && enemy.isTrigger == false) // 적 태그 확인
+            if (enemy.CompareTag("Enemy") && enemy.isTrigger == false && macMove.isDestroy == false) // 적 태그 확인
             {
                 macMove.Hitted();
             }
@@ -69,8 +68,23 @@ public class Player : MonoBehaviour
         {
             animator.SetTrigger("Attack");
         }
-
+        LimitPosition();
         animator.SetBool("IsMove", isMove);
+    }
+
+    private void LimitPosition()
+    {
+        float x = transform.position.x;
+        float y = transform.position.y;
+        if (x < -8.5f)
+            x = -8.5f;
+        else if (x > 8.5f)
+            x = 8.5f;
+        if (y < -4.5f)
+            y = -4.5f;
+        else if (y > 4.5f)
+            y = 4.5f;
+        transform.position = new Vector3(x, y, transform.position.z);
     }
 
     public float moveSpeed = 2.0f;

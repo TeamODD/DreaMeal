@@ -11,15 +11,18 @@ public class ResetMorningMap : MonoBehaviour
     public StoryManager stm;
     public GameObject resetUi;
     public Image background;
-    public float duration = 0.5f;
-    public IEnumerator FadeIn(Image img)
+    public float duration = 3f;
+    public Text text;
+    public IEnumerator FadeOut(Image img, Text text)
     {
         for (float t = 0; t < duration; t += Time.deltaTime)
         {
-            img.color = new Color(0, 0, 0, 1 - t / duration);
+            img.color = new Color(1, 1, 1, 1 - t / duration);
+            text.color = new Color(0, 0, 0, 1 - t / duration);
             yield return null;
         }
-        img.color = new Color(0, 0, 0, 0);
+        img.color = new Color(1, 1, 1, 0);
+        text.color = new Color(0, 0, 0, 0);
         resetUi.SetActive(false);
     }
     void Start()
@@ -47,7 +50,9 @@ public class ResetMorningMap : MonoBehaviour
             v.SetActive(false);
         }
         stm.gameObject.SetActive(false);
-        StartCoroutine(FadeIn(background));
+        resetUi.SetActive(true);
         MorningManager.Instance.NextDay();
+        text.text = MorningManager.Instance.date + "일차 낮";
+        StartCoroutine(FadeOut(background, text));
     }
 }

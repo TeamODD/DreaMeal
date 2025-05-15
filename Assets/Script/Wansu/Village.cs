@@ -18,7 +18,7 @@ public class Village : MonoBehaviour
     }
     void OnMouseEnter()
     {
-        transform.localScale = originalScale * 1.2f;
+        transform.localScale = originalScale * 1.1f;
     }
 
     void OnMouseExit()
