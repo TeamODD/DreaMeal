@@ -50,7 +50,7 @@ public class NightSystem : MonoBehaviour
             date = 0;
         else
             date = MorningManager.Instance.date;
-        date = 3;
+
         Color src = fadeInBackGround.GetComponent<SpriteRenderer>().color;
         fadeInBackGround.GetComponent<SpriteRenderer>().color = new Color(src.r, src.g, src.b, 0.0f);
 
