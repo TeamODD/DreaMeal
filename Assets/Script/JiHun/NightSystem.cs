@@ -51,6 +51,9 @@ public class NightSystem : MonoBehaviour
         else
             date = MorningManager.Instance.date;
 
+        Color src = fadeInBackGround.GetComponent<SpriteRenderer>().color;
+        fadeInBackGround.GetComponent<SpriteRenderer>().color = new Color(src.r, src.g, src.b, 0.0f);
+
         dateShowerText.text = (date + 1).ToString() + "ÀÏÂ÷ ¹ã";
         dateShowerText.color = Color.white;
         StartCoroutine(TextFader.FadeOutText(dateShowerText, dateShowerText.text, 3.0f));
@@ -69,16 +72,21 @@ public class NightSystem : MonoBehaviour
         ChangeToDream();
 
         realSponeTime = sponeTime[date] / 2.0f;
-    }
 
+    }
+    
     // Update is called once per frame
     void Update()
     {
         nightTime -= Time.deltaTime;
-        timerText.text = nightTime.ToString();
+ 
 
         if (nightTime <= 0)
-            SceneManager.LoadScene("Morning");
+        {
+            nightTime = 0.0f;
+            StartCoroutine(TurnOverToMorning());
+        }
+        timerText.text = nightTime.ToString();
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -106,6 +114,12 @@ public class NightSystem : MonoBehaviour
             sumOfMac += 1;
         }
 
+    }
+
+    private IEnumerator TurnOverToMorning()
+    {
+        yield return StartCoroutine(ImageFader.FadeInImage(fadeInBackGround.GetComponent<SpriteRenderer>(), 3.0f));
+        SceneManager.LoadScene("Morning");
     }
     private void SpownMac(bool sleep)
     {
@@ -200,4 +214,6 @@ public class NightSystem : MonoBehaviour
     public Text dateShowerText;
 
     private int sumOfMac = 0;
+
+    public GameObject fadeInBackGround;
 }

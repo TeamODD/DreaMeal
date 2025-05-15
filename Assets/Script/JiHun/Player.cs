@@ -68,8 +68,23 @@ public class Player : MonoBehaviour
         {
             animator.SetTrigger("Attack");
         }
-
+        LimitPosition();
         animator.SetBool("IsMove", isMove);
+    }
+
+    private void LimitPosition()
+    {
+        float x = transform.position.x;
+        float y = transform.position.y;
+        if (x < -8.5f)
+            x = -8.5f;
+        else if (x > 8.5f)
+            x = 8.5f;
+        if (y < -4.5f)
+            y = -4.5f;
+        else if (y > 4.5f)
+            y = 4.5f;
+        transform.position = new Vector3(x, y, transform.position.z);
     }
 
     public float moveSpeed = 2.0f;

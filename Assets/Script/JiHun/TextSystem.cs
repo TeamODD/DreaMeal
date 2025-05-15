@@ -19,7 +19,7 @@ public class TextShower
     {
         this.text = text;
         this.stringPeice = stringPeice;
-        fixPosition = new Vector3(this.text.rectTransform.anchoredPosition.x, this.text.rectTransform.anchoredPosition.y);
+        fixPosition = new Vector2(this.text.rectTransform.anchoredPosition.x, this.text.rectTransform.anchoredPosition.y);
     }
 
     public void MoveEffect()

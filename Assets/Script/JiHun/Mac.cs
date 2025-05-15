@@ -5,11 +5,31 @@ using System.Collections;
 public class ImageFader
 {
     // text색깔은 미리 정해서
-    public static IEnumerator FadeInImage(SpriteRenderer renderer, float fadeDuration)
+    public static IEnumerator FadeOutImage(SpriteRenderer renderer, float fadeDuration)
     {
         Color color = renderer.color;
         float startAlpha = 1f; // 완전히 투명
         float endAlpha = 0f;   // 완전한 불투명
+
+        float elapsedTime = 0f;
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float newAlpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / fadeDuration);
+            color.a = newAlpha;
+            renderer.color = color;
+            yield return null; // 다음 프레임까지 대기
+        }
+
+        // 마지막 단계에서 완전한 불투명 설정
+        color.a = endAlpha;
+        renderer.color = color;
+    }
+    public static IEnumerator FadeInImage(SpriteRenderer renderer, float fadeDuration)
+    {
+        Color color = renderer.color;
+        float startAlpha = 0f; // 완전히 투명
+        float endAlpha = 1f;   // 완전한 불투명
 
         float elapsedTime = 0f;
         while (elapsedTime < fadeDuration)
@@ -56,7 +76,7 @@ public class Mac : MonoBehaviour
     }
     private IEnumerator FadeAndDestroy()
     {
-        yield return StartCoroutine(ImageFader.FadeInImage(spriteRenderer, 1.0f)); // 페이드 인 실행
+        yield return StartCoroutine(ImageFader.FadeOutImage(spriteRenderer, 1.0f)); // 페이드 인 실행
         Die();
     }
 
