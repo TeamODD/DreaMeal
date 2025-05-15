@@ -29,6 +29,7 @@ public class TextShower
 
         // RectTransform을 통해 위치 조정
         text.rectTransform.anchoredPosition = new Vector2(text.rectTransform.anchoredPosition.x, y);
+        
     }
 
     public Text GetText() { return text; }
