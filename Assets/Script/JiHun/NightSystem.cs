@@ -50,7 +50,7 @@ public class NightSystem : MonoBehaviour
             date = 0;
         else
             date = MorningManager.Instance.date;
-
+        date = 3;
         Color src = fadeInBackGround.GetComponent<SpriteRenderer>().color;
         fadeInBackGround.GetComponent<SpriteRenderer>().color = new Color(src.r, src.g, src.b, 0.0f);
 
@@ -121,16 +121,23 @@ public class NightSystem : MonoBehaviour
         yield return StartCoroutine(ImageFader.FadeInImage(fadeInBackGround.GetComponent<SpriteRenderer>(), 3.0f));
         SceneManager.LoadScene("Morning");
     }
+
     private void SpownMac(bool sleep)
     {
         int sponerSize = sponers.Length;
         int randomSponerIndex = Random.Range(0, sponerSize);
         Transform sponerTransform = sponers[randomSponerIndex].transform;
 
-        GameObject newObject = Instantiate(macPrefab, sponerTransform);
+        Vector3 pos = new Vector3(Random.Range(3.8f, 9.0f), Random.Range(3.0f, 5.5f), 0.0f);
+        int pm = Random.Range(0, 2);
+        pos.x = pm == 0 ? pos.x : -pos.x;
+        pm = Random.Range(0, 2);
+        pos.y = pm == 0 ? pos.y : -pos.y;
+
+        GameObject newObject = Instantiate(macPrefab, pos, Quaternion.identity);
         Mac mac = newObject.GetComponent<Mac>();
 
-        int random = Random.Range(0, 100);
+        int random = Random.Range(1, 101);
         if (random <= ratioOfStrongMac[date])
         {
             mac.InitalizeMacEvent(MacIsDie, userHome.IsCollisionWithStrongMac);
@@ -146,7 +153,7 @@ public class NightSystem : MonoBehaviour
     private void MacIsDie(Mac mac)
     {
         macObjects.Remove(mac);
-        SpownMac(isSleep);
+        countOfDieMac += 1;
     }
     private void ChangeToDream()
     {
@@ -164,10 +171,13 @@ public class NightSystem : MonoBehaviour
 
         textSystem.ShouldRun(isSleep);
 
+        for (int i = 0; i < countOfDieMac; i++)
+            SpownMac(isSleep);
     }
 
     private void ChangeToWakeUp()
     {
+        countOfDieMac = 0;
         userHome.GetComponent<SpriteRenderer>().enabled = true;
         wakeUp.SetActive(true);
         sleep.SetActive(false);
@@ -180,7 +190,7 @@ public class NightSystem : MonoBehaviour
             mac.RenderEnable(!isSleep);
             mac.isSleep = isSleep;
         }
-
+        textSystem.HidePrevText();
         textSystem.ShouldRun(isSleep);
     }
 
@@ -216,4 +226,6 @@ public class NightSystem : MonoBehaviour
     private int sumOfMac = 0;
 
     public GameObject fadeInBackGround;
+
+    private int countOfDieMac = 0;
 }

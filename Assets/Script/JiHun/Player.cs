@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        transform.rotation = Quaternion.identity;
         bool isMove = false;
         if (Input.GetKey(KeyCode.A))
         {
