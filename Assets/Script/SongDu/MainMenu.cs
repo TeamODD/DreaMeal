@@ -1,23 +1,26 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+
 
 public class MainMenu : MonoBehaviour
 {
     public void OnGameStart()
     {
-        Debug.Log("Game Start 버튼 클릭됨");
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("JiHunScene");
     }
 
     public void OnSetting()
     {
-        Debug.Log("Setting 버튼 클릭됨");
         
     }
-
     public void OnFinish()
     {
-        Debug.Log("Finish 버튼 클릭됨");
-        Application.Quit(); 
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; // 에디터에서는 Play 모드 종료
+#else
+        Application.Quit(); // 빌드된 게임에서는 완전히 종료
+#endif
     }
+
 }
