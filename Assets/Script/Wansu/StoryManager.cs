@@ -18,10 +18,9 @@ public class DailyStory
 }
 public class StoryManager : MonoBehaviour
 {
-    public float duration = 0.5f;
+    public float duration = 2f;
     public Image endImg;
     public GameObject endUi;
-    public GameObject map;
     public TypingEffect te;
     public GradationAnimate gradationAnimate;
     public Text text;
@@ -88,7 +87,7 @@ public class StoryManager : MonoBehaviour
         storyImage.gameObject.SetActive(true);
         storyIndex = 0;
         string str = nowStoryTexts[storyIndex].Replace("\\n", "\n");
-        StartCoroutine(gradationAnimate.FadeImageWhite(storyImage, nowStoryImages[storyIndex]));
+        StartCoroutine(gradationAnimate.FadeImage(storyImage, nowStoryImages[storyIndex]));
         StartCoroutine(te.TypeDialog(text, str, new List<GameObject> { nextBtn })); 
     }
     public void OnNextClicked()
@@ -100,12 +99,12 @@ public class StoryManager : MonoBehaviour
             string str = nowStoryTexts[storyIndex].Replace("\\n", "\n");
             if (storyIndex == nowStoryTexts.Length - 1)
             {
-                StartCoroutine(gradationAnimate.FadeImageWhite(storyImage, nowStoryImages[storyIndex]));
+                StartCoroutine(gradationAnimate.FadeImage(storyImage, nowStoryImages[storyIndex]));
                 StartCoroutine(te.TypeDialog(text, str, new List<GameObject> { endBtn }));
             }
             else
             {
-                StartCoroutine(gradationAnimate.FadeImageWhite(storyImage, nowStoryImages[storyIndex]));
+                StartCoroutine(gradationAnimate.FadeImage(storyImage, nowStoryImages[storyIndex]));
                 StartCoroutine(te.TypeDialog(text, str,  new List<GameObject> { nextBtn }));
             }
         }
@@ -127,8 +126,14 @@ public class StoryManager : MonoBehaviour
     }
     public void OnEndClicked()
     {
-        map.SetActive(true);
-        endUi.SetActive(true);
-        StartCoroutine(GoToNight(endImg));
+        if (MorningManager.Instance.date == 4)
+        {
+            SceneManager.LoadScene("OpeningEnding");
+        }
+        else
+        {
+            endUi.SetActive(true);
+            StartCoroutine(GoToNight(endImg));
+        }
     }
 }
