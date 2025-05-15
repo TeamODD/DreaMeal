@@ -4,13 +4,26 @@ using UnityEngine.UI;
 
 public class GradationAnimate : MonoBehaviour
 {
-    public float duration = 0.5f;
+    public float duration = 0.2f;
     private bool isFading = false;
     private bool skipFade = false;
 
     public IEnumerator FadeImage(Image img, Sprite newSprite)
     {
-        if (img.sprite != newSprite)
+        if (newSprite == null)
+        {
+            isFading = true;
+                skipFade = false;
+                for (float t = 0; t < duration; t += Time.deltaTime)
+                {
+                    if (skipFade) break;
+                    img.color = new Color(t / duration, t / duration, t / duration);
+                    yield return null;
+                }
+                img.color = new Color(1, 1, 1, 1f);
+                isFading = false;
+        }
+        else if (img.sprite != newSprite)
         {
             isFading = true;
             skipFade = false;
