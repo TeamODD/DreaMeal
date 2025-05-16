@@ -126,6 +126,8 @@ public class Ending : MonoBehaviour
             if (str == "")
             {
                 textView.gameObject.SetActive(false);
+                if (flag)
+                    OpeningEndingSystem.Instance.allEndingBGM.SetActive(false);
             }
             if (storyIndex == nowTexts.Length - 1)
             {

@@ -6,18 +6,18 @@ using System.Collections;
 
 public class TextFader
 {
-    // text»ö±òÀº ¹Ì¸® Á¤ÇØ¼­
+    // textìƒ‰ê¹”ì€ ë¯¸ë¦¬ ì •í•´ì„œ
     public static IEnumerator FadeInText(Text text, string str, float fadeDuration)
     {
         text.text = str;
-        text.color = new Color(text.color.r, text.color.g, text.color.b, 0); // Åõ¸íÇÏ°Ô ÃÊ±âÈ­
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 0); // íˆ¬ëª…í•˜ê²Œ ì´ˆê¸°í™”
         float elapsedTime = 0f;
 
         while (elapsedTime < fadeDuration)
         {
             elapsedTime += Time.deltaTime;
             float alpha = elapsedTime / fadeDuration;
-            text.color = new Color(text.color.r, text.color.g, text.color.b, alpha); // Á¡Á¡ ¹à°Ô
+            text.color = new Color(text.color.r, text.color.g, text.color.b, alpha); // ì ì  ë°ê²Œ
             yield return null;
         }
 
@@ -27,14 +27,14 @@ public class TextFader
     public static IEnumerator FadeOutText(Text text, string str, float fadeDuration)
     {
         text.text = str;
-        text.color = new Color(text.color.r, text.color.g, text.color.b, 1.0f); // Åõ¸íÇÏ°Ô ÃÊ±âÈ­
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 1.0f); // íˆ¬ëª…í•˜ê²Œ ì´ˆê¸°í™”
         float elapsedTime = 0f;
 
         while (elapsedTime < fadeDuration)
         {
             elapsedTime += Time.deltaTime;
             float alpha = Mathf.Lerp(1.0f, 0.0f, elapsedTime / fadeDuration);
-            text.color = new Color(text.color.r, text.color.g, text.color.b, alpha); // Á¡Á¡ ¹à°Ô
+            text.color = new Color(text.color.r, text.color.g, text.color.b, alpha); // ì ì  ë°ê²Œ
             yield return null;
         }
 
@@ -54,7 +54,7 @@ public class NightSystem : MonoBehaviour
         Color src = fadeInBackGround.GetComponent<SpriteRenderer>().color;
         fadeInBackGround.GetComponent<SpriteRenderer>().color = new Color(src.r, src.g, src.b, 0.0f);
 
-        dateShowerText.text = (date + 1).ToString() + "ÀÏÂ÷ ¹ã";
+        dateShowerText.text = date.ToString() + "ì¼ì°¨ ë°¤";
         dateShowerText.color = Color.white;
         StartCoroutine(TextFader.FadeOutText(dateShowerText, dateShowerText.text, 3.0f));
 
@@ -94,13 +94,13 @@ public class NightSystem : MonoBehaviour
                 ChangeToWakeUp();
             else
                 if (player.IsInDoor())
-                    ChangeToDream();    // ÀÌ°É Àú±â À§¿¡¼­µµ ¾²°íÀÖ¾î¼­ ¹«Á¶°Ç ÀÌ·¸°Ô
+                    ChangeToDream();    // ì´ê±¸ ì €ê¸° ìœ„ì—ì„œë„ ì“°ê³ ìˆì–´ì„œ ë¬´ì¡°ê±´ ì´ë ‡ê²Œ
         }
 
         if (numberOfGenerateMac[date] <= sumOfMac)
             return;
 
-        // ²Ş »óÅÂÀÏ ¶§¸¸ ¸Æ »ı¼º
+        // ê¿ˆ ìƒíƒœì¼ ë•Œë§Œ ë§¥ ìƒì„±
         if (isSleep == false)
             return;
 
@@ -162,7 +162,7 @@ public class NightSystem : MonoBehaviour
         sleep.SetActive(true);
         isSleep = true;
 
-        // ÀÌ°É ¿ÉÀú¹ö ÆĞÅÏÀ¸·Î ÇØµµµÉµí?
+        // ì´ê±¸ ì˜µì €ë²„ íŒ¨í„´ìœ¼ë¡œ í•´ë„ë ë“¯?
         foreach (Mac mac in macObjects)
         {
             mac.RenderEnable(!isSleep);
