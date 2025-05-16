@@ -18,6 +18,11 @@ public class MainMenu : MonoBehaviour
     {
         
     }
+
+    public void OnRull()
+    {
+
+    }
     public void OnFinish()
     {
 #if UNITY_EDITOR
