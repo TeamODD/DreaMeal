@@ -7,16 +7,13 @@ public class setting : MonoBehaviour
     public GameObject mainPanel;     // MainMenuPanel 
     public GameObject optionPanel;     // SettingsPanel 
 
-    [Header("Settings UI")]
-    public Button continueButton;        // ContinueButton 
-    public GameObject AudioSlider;// AudioSlider 
 
     void Awake()
     {
         
         optionPanel.SetActive(false);
-        continueButton.gameObject.SetActive(false);
-        AudioSlider.SetActive(true);
+        
+       
     }
 
     
@@ -29,8 +26,8 @@ public class setting : MonoBehaviour
         optionPanel.SetActive(true);
 
         
-        continueButton.gameObject.SetActive(true);
-        AudioSlider.SetActive(true);
+        
+        
     }
 
     
