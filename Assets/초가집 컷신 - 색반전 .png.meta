@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d772e6f433bbc466ca479343e6568d95
+guid: 58aed00edd2d6674b984fc6cccfd124d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4230898019937019466
-    second: cheolTalk_0
+      213: -768712820141049736
+    second: "\uCD08\uAC00\uC9D1 \uCEF7\uC2E0 - \uC0C9\uBC18\uC804 _0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,19 +97,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -126,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cheolTalk_0
+      name: "\uCD08\uAC00\uC9D1 \uCEF7\uC2E0 - \uC0C9\uBC18\uC804 _0"
       rect:
         serializedVersion: 2
-        x: 414
-        y: 139
-        width: 966
-        height: 846
+        x: 0
+        y: 0
+        width: 1600
+        height: 900
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a46ef37355b27ba30800000000000000
-      internalID: 4230898019937019466
+      spriteID: 878343d43cbf455f0800000000000000
+      internalID: -768712820141049736
       vertices: []
       indices: 
       edges: []
@@ -160,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      cheolTalk_0: 4230898019937019466
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
