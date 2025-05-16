@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ public class NpcUi : MonoBehaviour
 {
     public Text text;
     public GameObject yesBtn;
+    public Image npcImg;
+    public float duration = 0.5f;
     public GameObject noBtn;
     public GameObject npcNextBtn;
     public List<GameObject> chooses;
@@ -42,6 +45,7 @@ public class NpcUi : MonoBehaviour
         nowText = dailyNpcText[MorningManager.Instance.date - 1].npcText;
         index = 0;
         StartCoroutine(te.TypeDialog(text, nowText[index], new List<GameObject> { npcNextBtn }));
+        StartCoroutine(ViewNpc(npcImg));
     }
     public void OnNpcNextClicked()
     {
@@ -91,10 +95,20 @@ public class NpcUi : MonoBehaviour
     public void OnChoiceButtonClicked(int type)
     {
         stm.gameObject.SetActive(true);
-        foreach (GameObject choose in chooses) 
-        { 
-            choose.SetActive(false); 
+        foreach (GameObject choose in chooses)
+        {
+            choose.SetActive(false);
         }
         stm.OnNpcChoice(npc, this, type);
+    }
+    public IEnumerator ViewNpc(Image img)
+    {
+        img.gameObject.SetActive(true);
+        for (float t = 0; t < duration; t += Time.deltaTime)
+        {
+            img.color = new Color(1, 1, 1, t / duration);
+            yield return null;
+        }
+        img.color = new Color(1, 1, 1, 1);
     }
 }

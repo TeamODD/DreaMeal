@@ -26,6 +26,8 @@ public class StoryManager : MonoBehaviour
     public Text text;
     public DailyStory[] stories;
     public Npc[] correctNpc;
+    public GameObject bgm;
+    public GameObject wrongBgm;
     private List<Sprite> nowStoryImages;
     private string[] nowStoryTexts;
     private int storyIndex = 0;
@@ -82,6 +84,8 @@ public class StoryManager : MonoBehaviour
         }
         if (!isCorrect)
         {
+            bgm.SetActive(false);
+            wrongBgm.SetActive(true);
             MorningManager.Instance.NpcNames.Add(correctNpc[currentDay - 1].name);
         }
         storyImage.gameObject.SetActive(true);

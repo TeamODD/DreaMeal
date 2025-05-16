@@ -7,7 +7,11 @@ public class MainMenu : MonoBehaviour
 {
     public void OnGameStart()
     {
-        SceneManager.LoadScene("JiHunScene");
+        if (MorningManager.Instance != null)
+        {
+            Destroy(MorningManager.Instance);
+        }
+        SceneManager.LoadScene("OpeningEnding");
     }
 
     public void OnSetting()
@@ -17,9 +21,9 @@ public class MainMenu : MonoBehaviour
     public void OnFinish()
     {
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false; // ¿¡µðÅÍ¿¡¼­´Â Play ¸ðµå Á¾·á
+        UnityEditor.EditorApplication.isPlaying = false; // ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ï¿½ï¿½ Play ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 #else
-        Application.Quit(); // ºôµåµÈ °ÔÀÓ¿¡¼­´Â ¿ÏÀüÈ÷ Á¾·á
+        Application.Quit(); // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 #endif
     }
 
