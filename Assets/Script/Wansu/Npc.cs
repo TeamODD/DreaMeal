@@ -17,6 +17,10 @@ public class Npc : MonoBehaviour
     {
         isChoose = false;
     }
+    public void Choose()
+    {
+        isChoose = true;
+    }
     void OnMouseDown()
     {
         transform.localScale = originalScale;
