@@ -16,6 +16,7 @@ public class Village : MonoBehaviour
     }
     void Start()
     {
+        isChoose = false;
         originalScale = transform.localScale;
     }
     void OnMouseDown()
@@ -26,7 +27,6 @@ public class Village : MonoBehaviour
             village.SetActive(true);
             map.SetActive(false);
         }
-        isChoose = true;
     }
     void OnMouseEnter()
     {
