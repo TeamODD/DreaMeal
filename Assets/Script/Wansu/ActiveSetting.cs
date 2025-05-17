@@ -7,35 +7,47 @@ public class ActiveSetting : MonoBehaviour
     public Village[] maps;
     void OnEnable()
     {
-        foreach (Npc npc in npcs)
+        if (npcs != null)
         {
-            if (npc.gameObject.activeSelf != false)
+            foreach (Npc npc in npcs)
             {
-                npc.Choose();
+                if (npc.gameObject.activeSelf != false)
+                {
+                    npc.Choose();
+                }
             }
         }
-        foreach (Village map in maps)
+        if (maps != null)
         {
-            if (map.gameObject.activeSelf != false)
+            foreach (Village map in maps)
             {
-                map.Choose();
+                if (map.gameObject.activeSelf != false)
+                {
+                    map.Choose();
+                }
             }
         }
     }
     void OnDisable()
     {
-        foreach (Npc npc in npcs)
+        if (npcs != null)
         {
-            if (npc.gameObject.activeSelf != false)
+            foreach (Npc npc in npcs)
             {
-                npc.ResetChoose();
+                if (npc.gameObject.activeSelf != false)
+                {
+                    npc.ResetChoose();
+                }
             }
         }
-        foreach (Village map in maps)
+        if (maps != null)
         {
-            if (map.gameObject.activeSelf != false)
+            foreach (Village map in maps)
             {
-                map.ResetChoose();
+                if (map.gameObject.activeSelf != false)
+                {
+                    map.ResetChoose();
+                }
             }
         }
     }
